@@ -37,7 +37,7 @@ class Handler extends ExceptionHandler
                 $model = substr($e->getMessage(), $firstIndex, $lastIndex - $firstIndex);
                 Log::error($e->getMessage());
                 
-                return ResponseBase::error("Id $model tidak ditemukan", 409);
+                return ResponseBase::error("Data $model tidak ditemukan", 409);
             } else if ($e instanceof ModelNotFoundException) {
                 Log::error($e->getMessage());
                 return ResponseBase::error('Data tidak ditemukan', 404);

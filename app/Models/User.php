@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use App\Models\Role;
 use App\Models\Survey;
+use App\Models\GlowUpPlan;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -29,6 +30,11 @@ class User extends Authenticatable implements JWTSubject
     public function survey()
     {
         return $this->hasOne(Survey::class, 'user_id');
+    }
+
+    public function glowUpPlans()
+    {
+        return $this->hasMany(GlowUpPlan::class);
     }
 
     public function getCreatedAtAttribute()
