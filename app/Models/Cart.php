@@ -3,25 +3,30 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use App\Models\Cart;
-use App\Models\Product;
+use App\Models\Order;
+use App\Models\ProductVariation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProductVariation extends Model
+class Cart extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function product()
+    public function user()
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function carts()
+    public function order()
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+
+    public function productVariation()
+    {
+        return $this->belongsTo(productVariation::class, 'product_variation_id');
     }
 
     public function getCreatedAtAttribute()

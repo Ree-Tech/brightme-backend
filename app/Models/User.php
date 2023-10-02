@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use App\Models\Role;
+use App\Models\Cart;
 use App\Models\Survey;
 use App\Models\GlowUpPlan;
 use Laravel\Sanctum\HasApiTokens;
@@ -35,6 +36,11 @@ class User extends Authenticatable implements JWTSubject
     public function glowUpPlans()
     {
         return $this->hasMany(GlowUpPlan::class);
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
 
     public function getCreatedAtAttribute()
