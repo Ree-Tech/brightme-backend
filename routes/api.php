@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\ProductController;
@@ -55,4 +56,11 @@ Route::group(['prefix' => 'products', 'as' => 'product.'], function () {
         Route::patch('/update/{product:slug}', [ProductController::class, 'update'])->name('update');
         Route::delete('/delete/{product:slug}', [ProductController::class, 'delete'])->name('delete');
     });
+});
+
+Route::group(['prefix' => 'carts', 'as' => 'cart.', 'middleware' => 'user'], function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/create', [CartController::class, 'create'])->name('create');
+    Route::patch('/update/{cart}', [CartController::class, 'update'])->name('update');
+    Route::delete('/delete/{cart}', [CartController::class, 'delete'])->name('delete');
 });
