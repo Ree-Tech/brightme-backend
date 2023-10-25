@@ -18,9 +18,10 @@ class CartController extends Controller
         $products = Cart::with(['productVariation.product'])
             ->where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
+            ->where('order_id', null)
             ->get();
 
-        return ResponseBase::success("Berhasil menerima data product", $products);
+        return ResponseBase::success('Berhasil menerima data cart', $products);
     }
 
     public function create(CartRequest $request)
@@ -35,7 +36,7 @@ class CartController extends Controller
             if ($isProductExist) {
                 $isProductExist->quantity += $request->quantity;
                 $isProductExist->save();
-                return ResponseBase::success("Berhasil menambahkan quantity product!", $isProductExist);
+                return ResponseBase::success('Berhasil menambahkan quantity product!', $isProductExist);
             } else {
                 $cart = new Cart();
                 $cart->user_id = $user->id;
@@ -44,9 +45,9 @@ class CartController extends Controller
                 $cart->save();
             }
 
-            return ResponseBase::success("Berhasil menambahkan data cart!", $cart);
+            return ResponseBase::success('Berhasil menambahkan data cart!', $cart);
         } catch (\Exception $e) {
-            Log::error('Gagal menambahkan data cart: ' . $e->getMessage());
+            Log::error('Gagal menambahkan data cart -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
             return ResponseBase::error('Gagal menambahkan data cart!', 409);
         }
     }
@@ -57,9 +58,9 @@ class CartController extends Controller
             $request->filled('quantity') ? $cart->quantity = $request->quantity : null;
             $cart->save();
 
-            return ResponseBase::success("Berhasil merubah data cart", $cart);
+            return ResponseBase::success('Berhasil merubah data cart', $cart);
         } catch (\Exception $e) {
-            Log::error('Gagal merubah data cart: ' . $e->getMessage());
+            Log::error('Gagal merubah data cart -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
             return ResponseBase::error('Gagal merubah data cart', 409);
         }
     }
@@ -68,9 +69,9 @@ class CartController extends Controller
     {
         try {
             $cart->delete();
-            return ResponseBase::success("Berhasil menghapus data cart");
+            return ResponseBase::success('Berhasil menghapus data cart');
         } catch (\Exception $e) {
-            Log::error('Gagal menghapus data cart: ' . $e->getMessage());
+            Log::error('Gagal menghapus data cart -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
             return ResponseBase::error('Gagal menghapus data cart', 409);
         }
     }

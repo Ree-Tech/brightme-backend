@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use JWTAuth;
 use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 use App\Libraries\ResponseBase;
 use App\Http\Requests\AuthRequest;

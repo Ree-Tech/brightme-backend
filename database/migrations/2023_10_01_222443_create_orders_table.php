@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->uuid('invoice_id')->unique();
             $table->double('price');
             $table->double('additional_cost')->default(0);
             $table->string('payment_type');
             $table->string('status')->default('Pending');
+            // $table->enum('status', ['Terdaftar', 'Lolos Tahap 1', 'Lolos Tahap 2'])->default('Pending');
             $table->string('tracking_number')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             'Customer',
             'Admin',
         ];
-        foreach($roles as $role){
+        foreach ($roles as $role) {
             Role::create([
                 'name' => $role,
             ]);
@@ -27,12 +27,22 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ProductSeeder::class);
 
-        // User
+        // Admin
         User::create([
             'role_id' => 2,
             'name' => 'Bagas',
             'phone' => '6282234018230',
             'email' => 'bagas@gmail.com',
+            'is_verif' => 1,
+            'password' => Hash::make('Password234#')
+        ]);
+
+        // Customer
+        User::create([
+            'role_id' => 1,
+            'name' => 'Akbar',
+            'phone' => '6282234045678',
+            'email' => 'akbar@gmail.com',
             'is_verif' => 1,
             'password' => Hash::make('Password234#')
         ]);

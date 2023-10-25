@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\ArtisanController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\GlowUpPlanController;
 use App\Http\Controllers\Api\ProductCategoryController;
@@ -63,4 +65,23 @@ Route::group(['prefix' => 'carts', 'as' => 'cart.', 'middleware' => 'user'], fun
     Route::post('/create', [CartController::class, 'create'])->name('create');
     Route::patch('/update/{cart}', [CartController::class, 'update'])->name('update');
     Route::delete('/delete/{cart}', [CartController::class, 'delete'])->name('delete');
+});
+
+Route::group(['prefix' => 'orders', 'as' => 'order.', 'middleware' => 'user'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('index');
+    Route::post('/create', [OrderController::class, 'create'])->name('create');
+    Route::patch('/update/{order}', [OrderController::class, 'update'])->name('update');
+    Route::delete('/delete/{order}', [OrderController::class, 'delete'])->name('delete');
+});
+Route::post('/orders/midtrans/callback', [OrderController::class, 'callback']);
+
+Route::group(['prefix' => 'artisan'], function () {
+    Route::get('/env', [ArtisanController::class, 'getEnv']);
+    Route::get('/key', [ArtisanController::class, 'key']);
+    Route::get('/seed', [ArtisanController::class, 'seed']);
+    Route::get('/fresh', [ArtisanController::class, 'fresh']);
+    Route::get('/cache', [ArtisanController::class, 'cache']);
+    Route::get('/storage', [ArtisanController::class, 'storage']);
+    Route::get('/migrate', [ArtisanController::class, 'migrate']);
+    Route::get('/optimize', [ArtisanController::class, 'optimize']);
 });

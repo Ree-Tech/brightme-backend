@@ -26,7 +26,7 @@ class Cart extends Model
 
     public function productVariation()
     {
-        return $this->belongsTo(productVariation::class, 'product_variation_id');
+        return $this->belongsTo(ProductVariation::class, 'product_variation_id');
     }
 
     public function getCreatedAtAttribute()

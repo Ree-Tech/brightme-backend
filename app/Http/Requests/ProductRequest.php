@@ -28,6 +28,7 @@ class ProductRequest extends FormRequest
                 'discount' => 'required|numeric',
                 'product_category_id' => 'required|exists:product_categories,id',
                 'description' => 'required|string',
+                'summary' => 'required|string',
             ];
         } else if ($this->routeIs('product.update')) {
             return [
@@ -36,6 +37,7 @@ class ProductRequest extends FormRequest
                 'discount' => 'nullable|numeric',
                 'product_category_id' => 'nullable|exists:product_categories,id',
                 'description' => 'nullable|string',
+                'summary' => 'nullable|string',
             ];
         }
 

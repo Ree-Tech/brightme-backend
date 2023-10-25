@@ -36,6 +36,7 @@ class ProductController extends Controller
             $product->discount = $request->discount;
             $product->product_category_id = $request->product_category_id;
             $product->description = $request->description;
+            $product->summary = $request->summary;
             $product->save();
 
             return ResponseBase::success("Berhasil menambahkan data product!", $product);
@@ -58,6 +59,7 @@ class ProductController extends Controller
             $request->filled('discount') ? $product->discount = $request->discount : null;
             $request->filled('product_category_id') ? $product->product_category_id = $request->product_category_id : null;
             $request->filled('description') ? $product->description = $request->description : null;
+            $request->filled('summary') ? $product->summary = $request->summary : null;
 
             $slug = $this->slugGenerator($product->name);
 

@@ -37,6 +37,7 @@ class ProductSeeder extends Seeder
         $product1 = Product::create([
             'name' => 'Travel Pack - True Brotherhod',
             'description' => 'Nourishing beard, energizin and brightening face, hair and body wash, Leaflet',
+            'summary' => 'Dummy summary for testing purpose',
             'usage' => 'For Daily Usage',
             'discount' => '10',
             'slug' => 'travel-pack-true',
@@ -46,6 +47,7 @@ class ProductSeeder extends Seeder
         $product2 = Product::create([
             'name' => 'Natural Daily Aloe Hydramild Gel',
             'description' => 'A multi-functional gel containing natural Aloe vera that provides extra moisture with a soothing effect and cools dry and reddened skin from the sun. Its unique, light, and non-sticky formula works as an anti-irritant, anti-inflammatory, as a soothing agent for sunburned skin, and helps increase skin resistance (skin barrier)',
+            'summary' => 'Dummy summary for testing purpose',
             'usage' => 'Moisturizer Apply evenly on the skin that is dry, itchy or red. Can be applied on the face, body, feet, hands and hair.',
             'discount' => '10',
             'slug' => 'natural-daily-aloe',
@@ -55,6 +57,7 @@ class ProductSeeder extends Seeder
         $product3 = Product::create([
             'name' => 'Wardah White Secret 5in1',
             'description' => 'Nourishing beard, energizin and brightening face, hair and body wash, Leaflet',
+            'summary' => 'Dummy summary for testing purpose',
             'usage' => 'For Daily Usage',
             'discount' => '10',
             'slug' => 'wardah-white-secret',
