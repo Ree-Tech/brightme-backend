@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\ProductVariationController;
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     Route::get('/google', [AuthController::class, 'redirectToGoogle'])->middleware('guest')->name('google.login');
     Route::get('/google/callback', [AuthController::class, 'handleGoogleCallback'])->middleware('guest')->name('google.callback');
+    Route::post('/firebase', [AuthController::class, 'firebase'])->middleware('guest')->name('google.firebase');
     Route::post('/confirm', [AuthController::class, 'confirmCode'])->middleware('guest')->name('confirm');
     Route::post('/forgot', [AuthController::class, 'sendEmailForgot'])->middleware('guest')->name('forgot');
     Route::post('/forgot/submit', [AuthController::class, 'confirmCode'])->middleware('guest')->name('forgot.submit');

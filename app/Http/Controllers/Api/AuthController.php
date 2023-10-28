@@ -25,7 +25,13 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($credentials))
             return ResponseBase::error("Password salah", 403);
 
-        return ResponseBase::success('Login berhasil', ['token' => $token, 'type' => 'bearer']);
+        $user = User::where('email', $request->email)->firstOrFail();
+
+        return ResponseBase::success('Login berhasil', [
+            'token' => $token,
+            'type' => 'bearer',
+            'is_survey' => isset($user->survey)
+        ]);
     }
 
     public function register(AuthRequest $request)
@@ -70,6 +76,26 @@ class AuthController extends Controller
 
             return ResponseBase::success('Login berhasil', ['token' => $token, 'type' => 'bearer']);
         } catch (\Exception $e) {
+            Log::error('Gagal autentikasi google -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
+            return ResponseBase::error("Gagal autentikasi google : " . $e->getMessage(), 403);
+        }
+    }
+
+    public function firebase(AuthRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $authUser = $this->findOrCreateUser($request);
+            $token = JWTAuth::fromUser($authUser);
+
+            DB::commit();
+            return ResponseBase::success('Login berhasil', [
+                'token' => $token,
+                'type' => 'bearer',
+                'is_survey' => isset($authUser->survey)
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
             Log::error('Gagal autentikasi google -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
             return ResponseBase::error("Gagal autentikasi google : " . $e->getMessage(), 403);
         }

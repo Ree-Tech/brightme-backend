@@ -26,6 +26,11 @@ class AuthRequest extends FormRequest
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:5|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
             ];
+        } else if ($this->routeIs('auth.google.firebase')) {
+            return [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email'
+            ];
         } else if ($this->routeIs('auth.forgot')) {
             return [
                 'email' => 'required|string|exists:users,email',
