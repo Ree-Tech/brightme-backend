@@ -96,7 +96,7 @@ class AuthController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Gagal autentikasi google -> ' . $e->getFile() . ':' . $e->getLine() . ' => ' . $e->getMessage());
+            Log::error('Gagal autentikasi google -> ' . $e->getFile() . ':' . $e->getLine() . ' -> ' . $e->getMessage());
             return ResponseBase::error("Gagal autentikasi google : " . $e->getMessage(), 403);
         }
     }
