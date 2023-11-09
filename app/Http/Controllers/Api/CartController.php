@@ -15,7 +15,7 @@ class CartController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
 
-        $products = Cart::with(['productVariation.product'])
+        $products = Cart::with(['productVariation.product.productImages'])
             ->where('user_id', $user->id)
             ->orderBy('updated_at', 'desc')
             ->where('order_id', null)
@@ -56,6 +56,7 @@ class CartController extends Controller
     {
         try {
             $request->filled('quantity') ? $cart->quantity = $request->quantity : null;
+            $request->filled('is_check') ? $cart->is_check = $request->is_check : null;
             $cart->save();
 
             return ResponseBase::success('Berhasil merubah data cart', $cart);
