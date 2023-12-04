@@ -12,27 +12,38 @@ class DetectionController extends Controller
 {
     public function detection(DetectionRequest $request)
     {
-        $client = new Client();
-        $response = $client->get('http://brightme.reetech.id/recomendation');
+        // $client = new Client();
+        // $response = $client->get('http://brightme.reetech.id/recomendation');
 
-        if ($response->getStatusCode() == 200) {
-            $responseData = json_decode($response->getBody()->getContents(), true);
+        // if ($response->getStatusCode() == 200) {
+        //     $responseData = json_decode($response->getBody()->getContents(), true);
 
-            $input1 = $responseData['data']['input1'];
-            $input2 = $responseData['data']['input2'];
+        //     $input1 = $responseData['data']['input1'];
+        //     $input2 = $responseData['data']['input2'];
 
-            $products = Product::with('productVariations')->where(function ($query) use ($input1, $input2) {
-                $query->where('recommendations', 'LIKE', '%' . $input1 . '%')
-                    ->orWhere('recommendations', 'LIKE', '%' . $input2 . '%');
-            })->get();
+        //     $products = Product::with('productVariations')->where(function ($query) use ($input1, $input2) {
+        //         $query->where('recommendations', 'LIKE', '%' . $input1 . '%')
+        //             ->orWhere('recommendations', 'LIKE', '%' . $input2 . '%');
+        //     })->get();
 
-            $data = [
-                'face_conditions' => $input1 . ' and ' . $input2,
-                'product_recommendations' => $products
-            ];
-            return ResponseBase::success('Berhasil kirim email forgot password', $data);
-        } else {
-            return ResponseBase::error('Kesalahan Server Machine Learning');
-        }
+        //     $data = [
+        //         'face_conditions' => 'Acne' . ' and ' . 'Dry',
+        //         'product_recommendations' => $products
+        //     ];
+        //     return ResponseBase::success('Berhasil deteksi wajah', $data);
+        // } else {
+        //     return ResponseBase::error('Kesalahan Server Machine Learning');
+        // }
+
+        $products = Product::with('productVariations')->where(function ($query) {
+            $query->where('recommendations', 'LIKE', '%' . 'Acne' . '%')
+                ->orWhere('recommendations', 'LIKE', '%' . 'Dry' . '%');
+        })->get();
+
+        $data = [
+            'face_conditions' => 'Acne' . ' and ' . 'Dry',
+            'product_recommendations' => $products
+        ];
+        return ResponseBase::success('Berhasil deteksi wajah', $data);
     }
 }
