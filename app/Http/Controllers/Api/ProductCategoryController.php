@@ -10,13 +10,13 @@ class ProductCategoryController extends Controller
 {
     public function index()
     {
-        $products = ProductCategory::with('products')->get();
+        $products = ProductCategory::with('products.productVariations')->get();
 
         return ResponseBase::success("Berhasil menerima data product category", $products);
     }
 
     public function show(ProductCategory $productCategory)
     {
-        return ResponseBase::success("Berhasil menerima data product category", $productCategory->load('products'));
+        return ResponseBase::success("Berhasil menerima data product category", $productCategory->load('products.productVariations'));
     }
 }

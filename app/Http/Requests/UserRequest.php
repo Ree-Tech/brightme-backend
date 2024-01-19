@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
                 'email' => 'nullable|email|unique:users,email,' . $id,
                 'password' => 'nullable|min:5|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
                 'phone' => 'nullable|numeric|starts_with:62|min:5',
+                'gender' => 'nullable|string|in:Male,Female,Prefer not to say',
                 'address' => 'nullable|string|max:255',
                 'birthdate' => 'nullable|date',
                 'role_id' => 'nullable|numeric|exists:roles,id',

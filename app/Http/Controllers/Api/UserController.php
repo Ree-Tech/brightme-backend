@@ -18,7 +18,7 @@ class UserController extends Controller
         return ResponseBase::success('Berhasil mendapatkan data profile', ['user' => $user]);
     }
 
-    public function update(UserRequest $request)
+    public function update(UserRequest $reWquest)
     {
         try {
             $id = JWTAuth::parseToken()->authenticate()->id;
@@ -28,6 +28,7 @@ class UserController extends Controller
             $user->email = $request->filled('email') ? $request->email : $user->email;
             $user->password = $request->filled('password') ? Hash::make($request->password) : $user->password;
             $user->phone = $request->filled('phone') ? $request->phone : $user->phone;
+            $user->gender = $request->filled('gender') ? $request->gender : $user->gender;
             $user->address = $request->filled('address') ? $request->address : $user->address;
             $user->birthdate = $request->filled('birthdate') ? $request->birthdate : $user->birthdate;
             $user->role_id = $request->filled('role_id') ? $request->role_id : $user->role_id;

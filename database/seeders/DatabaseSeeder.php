@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 2,
             'name' => 'Bagas',
             'phone' => '6282234018230',
+            'gender' => 'Male',
             'email' => 'bagas@gmail.com',
             'is_verif' => 1,
             'password' => Hash::make('Password234#')
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
             'role_id' => 1,
             'name' => 'Akbar',
             'phone' => '6282234045678',
+            'gender' => 'Male',
             'email' => 'akbar@gmail.com',
             'is_verif' => 1,
             'password' => Hash::make('Password234#')

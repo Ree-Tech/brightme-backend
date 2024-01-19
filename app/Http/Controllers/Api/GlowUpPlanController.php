@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\GlowUpPlan;
+use Illuminate\Support\Str;
 use App\Libraries\ResponseBase;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -34,8 +35,9 @@ class GlowUpPlanController extends Controller
 
             $image = $request->img;
             $fileNameOriginal = $image->getClientOriginalName();
-            $fileName = basename($fileNameOriginal, '.' . $image->getClientOriginalExtension()) . '-' . time() . '.' . $image->getClientOriginalExtension();
-            $path = Storage::disk('public')->putFileAs('images', $image, $fileName);
+            $fileName = Str::slug(basename($fileNameOriginal, '.' . $image->getClientOriginalExtension()) . '-' . time());
+            $fileNameExtension = $fileName  . '.' . $image->getClientOriginalExtension();
+            $path = Storage::disk('public')->putFileAs('products', $image, $fileNameExtension);
 
             if (!$path)
                 return ResponseBase::error("Terjadi kesalahan upload gambar Glow Up Plan", 409);

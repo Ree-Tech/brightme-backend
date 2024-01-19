@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
 
-class CartRequest extends FormRequest
+class DetectionRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,15 +15,9 @@ class CartRequest extends FormRequest
 
     public function rules(): array
     {
-        if ($this->routeIs('cart.create')) {
+        if ($this->routeIs('detection.index')) {
             return [
-                'product_variation_id' => 'required|exists:product_variations,id',
-                'quantity' => 'required|numeric|integer|min:1',
-            ];
-        } else if ($this->routeIs('cart.update')) {
-            return [
-                'quantity' => 'nullable|numeric|integer|min:1',
-                'is_check' => 'nullable|boolean',
+                'img' => 'required|image|mimes:jpeg,png,jpg,gif',
             ];
         }
 

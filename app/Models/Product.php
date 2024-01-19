@@ -33,6 +33,11 @@ class Product extends Model
         return $this->hasMany(ProductVariation::class);
     }
 
+    public function productImages()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
     public function productReviews()
     {
         return $this->hasMany(ProductReview::class);

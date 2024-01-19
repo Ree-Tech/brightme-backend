@@ -36,9 +36,11 @@ class ProductSeeder extends Seeder
         // Product
         $product1 = Product::create([
             'name' => 'Travel Pack - True Brotherhod',
+            'brand' => 'Wardah',
             'description' => 'Nourishing beard, energizin and brightening face, hair and body wash, Leaflet',
             'summary' => 'Dummy summary for testing purpose',
             'usage' => 'For Daily Usage',
+            'recommendations' => 'acne,oily',
             'discount' => '10',
             'slug' => 'travel-pack-true',
             'product_category_id' => 1
@@ -46,9 +48,11 @@ class ProductSeeder extends Seeder
 
         $product2 = Product::create([
             'name' => 'Natural Daily Aloe Hydramild Gel',
+            'brand' => 'Skintific',
             'description' => 'A multi-functional gel containing natural Aloe vera that provides extra moisture with a soothing effect and cools dry and reddened skin from the sun. Its unique, light, and non-sticky formula works as an anti-irritant, anti-inflammatory, as a soothing agent for sunburned skin, and helps increase skin resistance (skin barrier)',
             'summary' => 'Dummy summary for testing purpose',
             'usage' => 'Moisturizer Apply evenly on the skin that is dry, itchy or red. Can be applied on the face, body, feet, hands and hair.',
+            'recommendations' => 'dry',
             'discount' => '10',
             'slug' => 'natural-daily-aloe',
             'product_category_id' => 2
@@ -56,9 +60,11 @@ class ProductSeeder extends Seeder
 
         $product3 = Product::create([
             'name' => 'Wardah White Secret 5in1',
+            'brand' => 'Loreal',
             'description' => 'Nourishing beard, energizin and brightening face, hair and body wash, Leaflet',
             'summary' => 'Dummy summary for testing purpose',
             'usage' => 'For Daily Usage',
+            'recommendations' => 'acne',
             'discount' => '10',
             'slug' => 'wardah-white-secret',
             'product_category_id' => 3

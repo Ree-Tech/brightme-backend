@@ -3,12 +3,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use App\Models\Cart;
-use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class ProductVariation extends Model
+class ProductImage extends Model
 {
     use HasFactory;
 
@@ -19,14 +17,16 @@ class ProductVariation extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
-    public function carts()
+    public function getImgAttribute()
     {
-        return $this->hasMany(Cart::class);
-    }
-
-    public function likedProducts()
-    {
-        return $this->hasMany(LikedProduct::class);
+        if ($this->attributes['img'] == null)
+            return null;
+            
+        if (config('app.env') === 'local') {
+            return asset('storage/' . $this->attributes['img']);
+        } else {
+            return asset('public/storage/' . $this->attributes['img']);
+        }
     }
 
     public function getCreatedAtAttribute()

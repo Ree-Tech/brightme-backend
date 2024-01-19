@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\SurveyController;
 use App\Http\Controllers\Api\ArtisanController;
+use App\Http\Controllers\Api\DetectionController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\GlowUpPlanController;
+use App\Http\Controllers\Api\LikedProductController;
 use App\Http\Controllers\Api\ProductCategoryController;
 use App\Http\Controllers\Api\ProductVariationController;
 
@@ -33,6 +35,10 @@ Route::group(['prefix' => 'survey', 'as' => 'survey.', 'middleware' => 'user'], 
     Route::post('/create', [SurveyController::class, 'store'])->name('create');
 });
 
+Route::group(['prefix' => 'detection', 'as' => 'detection.', 'middleware' => 'user'], function () {
+    Route::post('/', [DetectionController::class, 'detection'])->name('index');
+});
+
 Route::group(['prefix' => 'glow-up', 'as' => 'glow-up.', 'middleware' => 'user'], function () {
     Route::get('/', [GlowUpPlanController::class, 'index'])->name('index');
     Route::get('/{id}', [GlowUpPlanController::class, 'show'])->name('show');
@@ -46,7 +52,14 @@ Route::group(['prefix' => 'product-categories', 'as' => 'product-categories.', '
 });
 
 Route::group(['prefix' => 'product-variations', 'as' => 'product-variations.', 'middleware' => 'user'], function () {
+    Route::post('/create', [ProductVariationController::class, 'store'])->name('create');
     Route::get('/{id}', [ProductVariationController::class, 'show'])->name('show');
+});
+
+Route::group(['prefix' => 'liked-products', 'as' => 'liked-products.', 'middleware' => 'user'], function () {
+    Route::get('/', [LikedProductController::class, 'index'])->name('index');
+    Route::post('/create', [LikedProductController::class, 'create'])->name('create');
+    Route::delete('/delete/{likedProduct:id}', [LikedProductController::class, 'delete'])->name('delete');
 });
 
 Route::group(['prefix' => 'products', 'as' => 'product.'], function () {
